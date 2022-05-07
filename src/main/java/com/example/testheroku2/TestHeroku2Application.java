@@ -18,7 +18,9 @@ class HomeController{
 
     @GetMapping("/")
     String hello(){
-        return "Hello World!";
+        return "Hey bro.\nHvis du kan se den " +
+                "meddelese, så betyder det, " +
+                "at det er en vellykkede test.";
     }
 
 }
