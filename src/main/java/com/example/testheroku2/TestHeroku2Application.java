@@ -20,7 +20,7 @@ class HomeController{
     String hello(){
         return "Hey bro.\nHvis du kan se den " +
                 "meddelese, så betyder det, " +
-                "at det er en vellykkede test.";
+                "at det er en vellykkede test...";
     }
 
 }
