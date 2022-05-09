@@ -13,6 +13,7 @@ public class TestHeroku2Application {
     }
 
 }
+/*
 @RestController
 class HomeController{
 
@@ -24,3 +25,4 @@ class HomeController{
     }
 
 }
+*/
