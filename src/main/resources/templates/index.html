@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Vanløse alle 82</title>
@@ -28,7 +28,11 @@
         </tr>
         <tr>
             <td>1.Basement Living room</td>
-            <td></td>
+            <td >
+                <select name="memberName" >
+                    <option th:each="member : ${MembersList}" th:text="${member.memberName}"></option>
+                </select>
+            </td>
             <td></td>
             <td></td>
             <td></td>
@@ -97,6 +101,14 @@
             <td></td>
         </tr>
     </table>
+</div>
+
+<hr>
+
+<div>
+    <a href="/new-member">
+        <button>New Member</button>
+    </a>
 </div>
 </body>
 </html>
