@@ -1,7 +1,7 @@
 package com.example.testheroku2.Service;
 
 import com.example.testheroku2.Model.Member;
-import com.example.testheroku2.Repository.MemberRepository;
+import com.example.testheroku2.Repository.MemberRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public class MemberService {
 
     @Autowired
-    MemberRepository memberRepo;
+    MemberRepo memberRepo;
 
     public List<Member> fetchAll () {
         for (int i = 0; i < memberRepo.fetchAll().size(); i++) {

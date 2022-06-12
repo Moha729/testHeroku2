@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Vanløse alle 82</title>
+</head>
+<body>
+
+<div>
+    <form action="/set-done-by" method="POST">
+        <input name="sectionId" type="number" th:value="${oneArea.sectionId}">
+        <input name="sectionId" type="text" th:value="${oneArea.assignedTo}">
+
+        <label>Choose your name</label>
+        <select name="doneBy">
+            <option th:each="member : ${membersList}" th:text="${member.memberName}"
+            ></option>
+        </select>
+        <!--        <input name="doneBy" type="text" placeholder="done by">-->
+        <input value="Confirm" type="submit">
+    </form>
+</div>
+
+
+</body>
+</html>

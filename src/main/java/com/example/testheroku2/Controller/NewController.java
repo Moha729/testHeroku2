@@ -2,6 +2,7 @@ package com.example.testheroku2.Controller;
 
 import com.example.testheroku2.Model.Member;
 import com.example.testheroku2.Service.MemberService;
+import com.example.testheroku2.Service.cleaning.CleaningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +15,14 @@ public class NewController {
 
     @Autowired
     MemberService memberService;
+    @Autowired
+    CleaningService cleaningService;
 
     @GetMapping("/")
-    public String getInd(Model model){
+    public String getInd(Model model, Model model2){
         model.addAttribute("MembersList", memberService.fetchAll());
-        return "index";
+        model2.addAttribute("sectionsList", cleaningService.fetchAll());
+        return "index3";
     }
 
     @GetMapping("/new-member")

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Vanløse alle 82</title>
+    <link rel="stylesheet" href="/styles/table.css">
+
+</head>
+<body>
+<div>
+    <div>
+    <h3></h3>
+    <table>
+        <tr>
+            <th>Week</th>
+            <th>Valid date</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    </div>
+    <div>
+    <table>
+        <tr>
+            <th>Section</th>
+            <th>Assigned to</th>
+            <th>Done by</th>
+            <th>Approved</th>
+        </tr>
+
+        <tr th:each="section :${sectionsList}">
+
+            <td th:text="${section.sectionName}"></td>
+
+            <td >
+                <a th:href="@{'/set-cleaning-on-section/'+${section.sectionId}}">
+            <table >
+                <tr>
+                    <td th:text="${section.assignedTo}"></td>
+                </tr>
+        </table>
+            </a>
+            </td>
+            <td >
+                <a th:href="@{'/set-done-by/'+${section.sectionId}}">
+                    <table >
+                        <tr>
+                            <td th:text="${section.doneBy}"></td>
+                        </tr>
+                    </table>
+                </a>
+            </td>
+            <td th:text="${section.approvedStatus} ? 'DONE' : ''">
+                </td>
+        </tr>
+    </table>
+    </div>
+</div>
+</body>
+</html>

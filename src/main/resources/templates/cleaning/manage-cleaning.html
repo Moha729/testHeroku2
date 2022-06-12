@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Vanløse alle 82</title>
+</head>
+<body>
+
+<div>
+    <form action="/add-new-section" method="POST">
+        <label>Add new Section</label>
+        <input type="text" name="sectionName" placeholder="Insert section">
+        <input type="number" name="sectionId" placeholder="Insert section index" max="20">
+        <input type="submit" value="Create">
+    </form>
+
+
+</div>
+
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Section</th>
+            <th>Assigned to</th>
+            <th>Done by</th>
+            <th>Approved</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="section :${sectionsList}">
+            <td th:text="${section.sectionName}"></td>
+            <td th:text="${section.sectionName}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
