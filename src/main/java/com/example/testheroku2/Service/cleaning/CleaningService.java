@@ -1,5 +1,6 @@
 package com.example.testheroku2.Service.cleaning;
 
+import com.example.testheroku2.Model.Member;
 import com.example.testheroku2.Model.cleaning.CleaningArea;
 import com.example.testheroku2.Repository.CleaningRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,22 @@ public class CleaningService {
 
     public void updateById(int id, CleaningArea section){
         cleaningRepo.setAssigendTo(id, section);
+    }
+
+    public void setAssigenTo(ArrayList<Member> members, ArrayList<CleaningArea> areas, int currentWeek){
+        int weeksCount = areas.size();
+        System.out.println("Weeks count: "+ weeksCount);
+        int membersCount = members.size();
+
+        for (int i = 0; i < currentWeek; i++) {
+            for (int j = 0; j < weeksCount; j++) {
+                for (int k = 0; k < membersCount; k++) {
+                    areas.get(j).setAssignedTo(members.get(k).getMemberName());
+                    cleaningRepo.setAssigendTo(j, areas.get(j));
+
+                }
+            }
+        }
     }
 
 

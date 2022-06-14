@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <title>Vanløse alle 82</title>
     <link rel="stylesheet" href="/styles/table.css">
-
 </head>
 <body>
-
 <div>
     <div>
         <h3></h3>
@@ -17,19 +15,40 @@
                 <th>Valid date</th>
             </tr>
             <tr>
-                <td></td>
+                <td>
+                    <form action="/" method="POST">
+                        <select name="weekNumb">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                        </select>
+                        <input type="submit" value="Choose">
+                    </form>
+                </td>
                 <td></td>
             </tr>
         </table>
     </div>
     <div>
         <table>
-            <tr>
+            <tr >
                 <th>Section</th>
                 <th>Assigned to</th>
                 <th>Done by</th>
                 <th>Approved</th>
-                <th>Approve</th>
             </tr>
 
             <tr th:each="section :${sectionsList}">
@@ -37,13 +56,13 @@
                 <td th:text="${section.sectionName}"></td>
 
                 <td >
-                    <a th:href="@{'/set-cleaning-on-section/'+${section.sectionId}}">
+<!--                    <a th:href="@{'/set-cleaning-on-section/'+${section.sectionId}}">-->
                         <table >
                             <tr>
                                 <td th:text="${section.assignedTo}"></td>
                             </tr>
                         </table>
-                    </a>
+<!--                    </a>-->
                 </td>
                 <td >
                     <a th:href="@{'/set-done-by/'+${section.sectionId}}">
@@ -56,45 +75,9 @@
                 </td>
                 <td th:text="${section.approvedStatus} ? 'DONE' : ''">
                 </td>
-                <td>
-                    <a th:href="@{'/set-approved/'+${section.sectionId}}">
-                        Approve status
-                    </a>
-                </td>
             </tr>
         </table>
     </div>
 </div>
-
-<div style="float: left">
-
-    <a href="/add-new-section">
-        <button>Add New Section</button>
-    </a>
-
-</div>
-
-
-
-
-<!--<div>-->
-<!--    <table>-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>Section</th>-->
-<!--            <th>Assigned to</th>-->
-<!--            <th>Done by</th>-->
-<!--            <th>Approved</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="section :${sectionsList}">-->
-<!--            <td th:text="${section.sectionName}"></td>-->
-<!--            <td th:text="${section.sectionName}"></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
-
 </body>
 </html>

@@ -28,4 +28,6 @@ public class Member {
     public void setMemberName(String memberName) {
         this.memberName = memberName;
     }
+
+
 }
