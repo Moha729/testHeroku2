@@ -6,10 +6,12 @@
     <link rel="stylesheet" href="/styles/table.css">
 </head>
 <body>
-<div>
-    <div>
+
+<div> <!--id="tableDiv" style="    width: 100%;
+    border: solid blue;"-->
+    <div> <!--style="    width: 60%;"-->
         <h3></h3>
-        <table>
+        <table>  <!--style="    width: 100%;"-->
             <tr>
                 <th>Week</th>
                 <th>Valid date</th>
@@ -36,14 +38,16 @@
                             <option value="16">16</option>
                         </select>
                         <input type="submit" value="Choose">
+                        <span th:text="${'current week '+displayWeek}"></span>
+
                     </form>
                 </td>
                 <td></td>
             </tr>
         </table>
     </div>
-    <div>
-        <table>
+    <div> <!--style="    width: 60%;"-->
+        <table>  <!--style="    width: 100%;"-->
             <tr >
                 <th>Section</th>
                 <th>Assigned to</th>
@@ -78,6 +82,30 @@
             </tr>
         </table>
     </div>
+
+   <!-- <div style="    width: 30%;
+     float: left; ">
+        <div style="
+            widt: 30%">
+
+            <a href="/add-new-section">
+                <button style=  "background-color: lawngreen;
+                             padding: 5% 5%;
+                             margin: 4% 4%">Add New Section</button>
+            </a>
+
+        </div>
+        <div >
+            <a href="/new-member">
+                <button  style=  "background-color: #57a3aa;
+                             padding: 5% 5%; float: left;
+                             margin: 4% 4%">New Member</button>
+            </a>
+        </div>
+    </div>-->
+
 </div>
+
+
 </body>
 </html>

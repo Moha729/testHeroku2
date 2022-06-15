@@ -25,30 +25,35 @@ public class NewController {
     CleaningService cleaningService;
 
     @GetMapping("/")
-    public String getInd(Model model, Model model2){
+    public String getInd(Model model, Model model2, Model model3){
 
         List<CleaningArea> areas = cleaningService.fetchAll();
 
 
         model.addAttribute("MembersList", testMembers(areas));
         model2.addAttribute("sectionsList", areas);
+        model3.addAttribute("displayWeek", weekNumb.getWeekNumb());
         return "index4";
     }
 
-    weekNumberWrapper weekNumb;
+    weekNumberWrapper weekNumb = new weekNumberWrapper();
 
 
     @PostMapping("/")
     public String getWeekNumber(@ModelAttribute weekNumberWrapper weekNumb){
         System.out.println(weekNumb.getWeekNumb()+" weekNumb");
+        this.weekNumb = weekNumb;
         return "redirect:/";
     }
     public ArrayList<Member> testMembers (/*int weekNumber*/List<CleaningArea> areas) {
         ArrayList<Member> members = new ArrayList<>();
-
-        for (int i = 1; i <= 16; i++) {
+        List<Member> readMembers = memberService.fetchAll();
+        for (int i = 0; i < readMembers.size(); i++) {
+            members.add(readMembers.get(i));
+        }
+        for (int i = readMembers.size(); i < 16; i++) {
             Member newMember = new Member();
-            newMember.setMemberName("person" + i);
+            newMember.setMemberName("person" + (i+1));
             members.add(newMember);
         }
 
@@ -58,8 +63,13 @@ public class NewController {
             areas.add(cleaningArea);
         }
 
+        if (weekNumb.getWeekNumb() == 0){
+            System.out.println("Week numb is "+weekNumb.getWeekNumb());
+            weekNumb.setWeekNumb(1);
+            System.out.println("Week numb is set to: "+weekNumb.getWeekNumb());
+        }
         int k = 0;
-        for (int j = 0; j < members.size(); j++) {
+        for (int j = 0; j < weekNumb.getWeekNumb(); j++) {
             System.out.println("Week " + (j + 1));
 
             if (j != 0) {
