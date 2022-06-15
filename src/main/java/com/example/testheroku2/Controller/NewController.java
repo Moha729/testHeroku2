@@ -2,9 +2,10 @@ package com.example.testheroku2.Controller;
 
 import com.example.testheroku2.Model.Member;
 import com.example.testheroku2.Model.cleaning.CleaningArea;
-import com.example.testheroku2.Model.weekNumberWrapper;
+import com.example.testheroku2.Model.WeekNumberWrapper;
 import com.example.testheroku2.Service.MemberService;
 import com.example.testheroku2.Service.cleaning.CleaningService;
+import com.example.testheroku2.Service.cleaning.WeekService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,8 @@ public class NewController {
     MemberService memberService;
     @Autowired
     CleaningService cleaningService;
+    @Autowired
+    WeekService weekService;
 
     @GetMapping("/")
     public String getInd(Model model, Model model2, Model model3){
@@ -36,13 +39,14 @@ public class NewController {
         return "index4";
     }
 
-    weekNumberWrapper weekNumb = new weekNumberWrapper();
+    WeekNumberWrapper weekNumb = new WeekNumberWrapper();
 
 
     @PostMapping("/")
-    public String getWeekNumber(@ModelAttribute weekNumberWrapper weekNumb){
+    public String getWeekNumber(@ModelAttribute WeekNumberWrapper weekNumb){
         System.out.println(weekNumb.getWeekNumb()+" weekNumb");
         this.weekNumb = weekNumb;
+        weekService.updateWeek(weekNumb.getWeekNumb());
         return "redirect:/";
     }
     public ArrayList<Member> testMembers (/*int weekNumber*/List<CleaningArea> areas) {
@@ -65,7 +69,7 @@ public class NewController {
 
         if (weekNumb.getWeekNumb() == 0){
             System.out.println("Week numb is "+weekNumb.getWeekNumb());
-            weekNumb.setWeekNumb(1);
+            weekNumb.setWeekNumb(weekService.getBeforeWeek());
             System.out.println("Week numb is set to: "+weekNumb.getWeekNumb());
         }
         int k = 0;

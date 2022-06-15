@@ -1,14 +1,14 @@
 package com.example.testheroku2.Model;
 
-public class weekNumberWrapper {
+public class WeekNumberWrapper {
 
     private int weekNumb;
 
-    public weekNumberWrapper(int weekNumb) {
+    public WeekNumberWrapper(int weekNumb) {
         this.weekNumb = weekNumb;
     }
 
-    public weekNumberWrapper() {
+    public WeekNumberWrapper() {
     }
 
     public int getWeekNumb() {
