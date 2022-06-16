@@ -10,6 +10,13 @@
 
 <div>
     <div>
+
+        <a href="/add-new-section">
+            <button>Add New Section</button>
+        </a>
+
+    </div>
+    <div>
         <h3></h3>
         <table>
             <tr>
@@ -17,11 +24,12 @@
                 <th>Valid date</th>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
+                <td>increment week</td>
+                <td>give it dates</td>
             </tr>
         </table>
     </div>
+
     <div>
         <table>
             <tr>
@@ -37,7 +45,7 @@
                 <td th:text="${section.sectionName}"></td>
 
                 <td >
-                    <a th:href="@{'/set-cleaning-on-section/'+${section.sectionId}}">
+                    <a ><!--th:href="@{'/set-cleaning-on-section/'+${section.sectionId}}"-->
                         <table >
                             <tr>
                                 <td th:text="${section.assignedTo}"></td>
@@ -66,13 +74,7 @@
     </div>
 </div>
 
-<div style="float: left">
 
-    <a href="/add-new-section">
-        <button>Add New Section</button>
-    </a>
-
-</div>
 
 
 

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Vanløse alle 82</title>
     <link rel="stylesheet" href="/styles/table.css">
+    <link rel="stylesheet" href="/styles/nav-bar.css">
+
 </head>
 <body>
 
@@ -13,13 +15,14 @@
         <h3></h3>
         <table>  <!--style="    width: 100%;"-->
             <tr>
-                <th>Week</th>
+                <th style=" padding: 1.5% 1.5%">Week</th>
                 <th>Valid date</th>
             </tr>
             <tr>
-                <td>
+                <td style=" padding: 1.5% 1.5%">
                     <form action="/" method="POST">
                         <select name="weekNumb">
+                            <option th:value="${displayWeek}" ></option><!--th:text="${(displayWeek + 23)}"-->
                             <option value="1">24</option>
                             <option value="2">25</option>
                             <option value="3">26</option>
@@ -38,7 +41,7 @@
                             <option value="16">39</option>
                         </select>
                         <input type="submit" value="Choose">
-                        <span th:text="${'current week '+(displayWeek + 23)+' index '+ displayWeek }"></span>
+                        <span th:text="${'current week '+(displayWeek + 23)+' round '+ displayWeek }"></span>
                     </form>
                 </td>
                 <td></td>
@@ -46,9 +49,9 @@
         </table>
     </div>
     <div> <!--style="    width: 60%;"-->
-        <table>  <!--style="    width: 100%;"-->
+        <table >  <!--style="    width: 100%;"-->
             <tr >
-                <th>Section</th>
+                <th style=" padding: 1.5% 1.5%">Section</th>
                 <th>Assigned to</th>
                 <th>Done by</th>
                 <th>Approved</th>
@@ -56,32 +59,165 @@
 
             <tr th:each="section :${sectionsList}">
 
-                <td th:text="${section.sectionName}"></td>
+                <td th:text="${section.sectionName}" style=" padding: 1.5% 1.5%"></td>
 
                 <td >
-<!--                 STYLE="display: flex;
-    justify-content: center;"   <a th:href="@{'/set-cleaning-on-section/'+${section.sectionId}}">-->
-                        <table >
-                            <tr >
-                                <td th:text="${section.assignedTo}"></td>
+                    <!--                 STYLE="display: flex;
+                        justify-content: center;"   <a th:href="@{'/set-cleaning-on-section/'+${section.sectionId}}">-->
+                    <div style="display: flex; justify-content: center">
+                        <table  >
+                            <tr style="">
+                                <td style="border: 0px;"
+                                    th:text="${section.assignedTo}"></td><!---->
                             </tr>
                         </table>
-<!--                    </a>-->
+                        <!--                    </a>-->
+                    </div>
                 </td>
-                <td >
-                    <a th:href="@{'/set-done-by/'+${section.sectionId}}">
-                        <table >
-                            <tr>
-                                <td th:text="${section.doneBy}"></td>
-                            </tr>
-                        </table>
-                    </a>
+                <td style="">
+
+                    <div style="width: 100%; height: 100%;">
+                        <a th:href="@{'/set-done-by/'+${section.sectionId}}"
+                           style="display: flex; justify-content: center; height: 100%
+                              ">
+                            <table style="width: 100%;">
+                                <tr >
+                                    <td style="border: 0px;" th:text="${section.doneBy}"></td><!---->
+                                </tr>
+                            </table>
+                        </a>
+                    </div>
                 </td>
                 <td th:text="${section.approvedStatus} ? 'DONE' : ''">
                 </td>
             </tr>
         </table>
     </div>
+
+<!--
+<header>
+    <nav>
+        <div class="nav-bar" style="height: 10%">
+
+&lt;!&ndash;            <div class="logo">&ndash;&gt;
+&lt;!&ndash;                <a href="/">Bakery By Hermann</a>&ndash;&gt;
+&lt;!&ndash;            </div>&ndash;&gt;
+
+            <ul>
+                <li><a href="/index4"><p>Vanløse<p>alle 82</p></a></li>
+&lt;!&ndash;
+                <div class="dropdown">
+                    <li><a href="/">Ansatte</a></li>
+                    <div class="dropdown-content">
+                        <a href="/baker">Bager</a>
+                        <a href="/cashier">Butiksansat</a>
+                        <a href="/driver">Chauffør</a>
+                    </div>
+
+                </div>
+&ndash;&gt;
+&lt;!&ndash;                <li><a href="/show-customer">Kunder</a></li>
+                <li><a href="/show-product">Varer</a></li>
+                <div class="dropdown">
+                    <li class="bestilling-active"><a href="/">Bestillinger</a></li>
+                    <div class="dropdown-content">
+                        <a href="/show-orders">Aktive bestillinger</a>
+                        <a href="/show-archived">Arkiverede bestillinger</a>
+                    </div>
+                </div>                <li><a href=/logout>Log ud</a></li>
+&ndash;&gt;
+            </ul>
+
+        </div>
+
+    </nav>
+</header>
+-->
+
+<!--<div> &lt;!&ndash;id="tableDiv" style="    width: 100%;
+    border: solid blue;"&ndash;&gt;
+    <div> &lt;!&ndash;style="    width: 60%;"&ndash;&gt;
+        <h3></h3>
+        <table style="    width: 75%;">  &lt;!&ndash;style="    width: 100%;"&ndash;&gt;
+            <tr>
+                <th style=" padding: 1.5% 1.5%">Week</th>
+                <th>Valid date</th>
+            </tr>
+            <tr>
+                <td style=" padding: 1.5% 1.5%">
+                    <form action="/" method="POST">
+                        <select name="weekNumb">
+                            <option th:value="${displayWeek}" th:text="${(displayWeek + 23)}"></option>
+                            <option value="1">24</option>
+                            <option value="2">25</option>
+                            <option value="3">26</option>
+                            <option value="4">27</option>
+                            <option value="5">28</option>
+                            <option value="6">29</option>
+                            <option value="7">30</option>
+                            <option value="8">31</option>
+                            <option value="9">32</option>
+                            <option value="10">33</option>
+                            <option value="11">34</option>
+                            <option value="12">35</option>
+                            <option value="13">36</option>
+                            <option value="14">37</option>
+                            <option value="15">38</option>
+                            <option value="16">39</option>
+                        </select>
+                        <input type="submit" value="Choose">
+                        <span th:text="${'current week '+(displayWeek + 23)+' round '+ displayWeek }"></span>
+                    </form>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div> &lt;!&ndash;style="    width: 60%;"&ndash;&gt;
+        <table style="    width: 75%;">  &lt;!&ndash;style="    width: 100%;"&ndash;&gt;
+            <tr >
+                <th style=" padding: 1.5% 1.5%">Section</th>
+                <th>Assigned to</th>
+                <th>Done by</th>
+                <th>Approved</th>
+            </tr>
+
+            <tr th:each="section :${sectionsList}">
+
+                <td th:text="${section.sectionName}" style=" padding: 1.5% 1.5%"></td>
+
+                <td >
+&lt;!&ndash;                 STYLE="display: flex;
+    justify-content: center;"   <a th:href="@{'/set-cleaning-on-section/'+${section.sectionId}}">&ndash;&gt;
+                    <div style="display: flex; justify-content: center">
+                    <table  >
+                            <tr style="">
+                                <td style="border: 0px;"
+                                   th:text="${section.assignedTo}"></td>&lt;!&ndash;&ndash;&gt;
+                            </tr>
+                        </table>
+&lt;!&ndash;                    </a>&ndash;&gt;
+                    </div>
+                </td>
+                <td style="">
+
+                    <div style="width: 100%; height: 100%;">
+                    <a th:href="@{'/set-done-by/'+${section.sectionId}}"
+                       style="display: flex; justify-content: center; height: 100%
+                              ">
+                        <table style="width: 100%;">
+                            <tr >
+                                <td style="border: 0px;" th:text="${section.doneBy}"></td>&lt;!&ndash;&ndash;&gt;
+                            </tr>
+                        </table>
+                    </a>
+                    </div>
+                </td>
+                <td th:text="${section.approvedStatus} ? 'DONE' : ''">
+                </td>
+            </tr>
+        </table>
+    </div>-->
 
    <!-- <div style="    width: 30%;
      float: left; ">

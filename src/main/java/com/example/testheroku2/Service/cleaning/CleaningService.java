@@ -29,7 +29,7 @@ public class CleaningService {
         return cleaningRepo.findById(id);
     }
 
-    public void updateById(int id, CleaningArea section){
+    public void setAssignedTo(int id, CleaningArea section){
         cleaningRepo.setAssigendTo(id, section);
     }
 

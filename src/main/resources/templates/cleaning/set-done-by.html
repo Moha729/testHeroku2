@@ -3,21 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Vanløse alle 82</title>
+    <link rel="stylesheet" href="/styles/forms.css">
+
 </head>
 <body>
 
-<div>
+<div class="form-container">
     <form action="/set-done-by" method="POST">
-        <input name="sectionId" type="number" th:value="${oneArea.sectionId}">
-        <input name="sectionId" type="text" th:value="${oneArea.assignedTo}">
+        <input name="sectionId" type="number" th:value="${oneArea.sectionId}" hidden
+               style="text-align: center">
 
-        <label>Choose your name</label>
-        <select name="doneBy">
+        <input name="sectionId"  th:value="${oneArea.assignedTo}"
+        style="text-align: center" readonly hidden>
+
+        <input name="sectionId" type="text" th:value="${oneArea.sectionName}"
+               style="text-align: center" readonly>
+
+        <label class="labelDescriptive" for="doneDropDown"
+               style="width: 35%; display: flex; justify-content: center" >Choose your name</label>
+        <div style="width: 35%; display: flex; justify-content: center">
+        <select id="doneDropDown" name="doneBy"
+                style="text-align: center; width: 35%; padding: 1%">
+            <option ></option>
             <option th:each="member : ${membersList}" th:text="${member.memberName}"
             ></option>
         </select>
+        </div>
         <!--        <input name="doneBy" type="text" placeholder="done by">-->
-        <input value="Confirm" type="submit">
+        <div  style="width: 35%; display: flex; justify-content: center">
+        <input value="Confirm" type="submit" style="width: 35%; position: unset; display: flex; justify-content: center">
+            </div>
     </form>
 </div>
 

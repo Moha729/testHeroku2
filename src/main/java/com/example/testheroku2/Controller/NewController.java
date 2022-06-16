@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -92,8 +94,13 @@ public class NewController {
                 k++;
             }
         }
-
+        setAssignedTo((ArrayList<CleaningArea>) areas);
         return members;
+    }
+    public void setAssignedTo(ArrayList<CleaningArea> areas){
+        for (int i = 0; i < areas.size(); i++) {
+            cleaningService.setAssignedTo(areas.get(i).getSectionId(), areas.get(i));
+        }
     }
 
     @GetMapping("/set-done-by/{sectionID}")
@@ -110,6 +117,12 @@ public class NewController {
 //        System.out.println(cleaningArea.getAssignedTo()+" are we even here");
 //        System.out.println(cleaningArea.getSectionName());
 //        System.out.println(cleaningArea.getSectionId());
+        Date doneDateAndTime = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        cleaningArea.setCompletionDate(dateFormat.format(doneDateAndTime));
+/*
+* insert into cleaning_data () values : weekNumb, sectionId, assignedTo, doneBy, doneDate, doneStatus
+* */
         cleaningService.setDoneBy(cleaningArea.getSectionId(), cleaningArea);
         return "redirect:/";
     }

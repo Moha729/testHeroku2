@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Vanløse alle 82</title>
+    <link rel="stylesheet" href="/styles/forms.css">
+
 </head>
 <body>
 
-<div>
+<div class="form-container">
     <form action="/set-approved" method="POST">
         <input name="sectionId" type="number" th:value="${oneArea.sectionId}">
-        <input name="sectionId" type="text" th:value="${oneArea.assignedTo}">
-        <input name="sectionId" type="text" th:value="${oneArea.doneBy}">
+        <input name="sectionName" type="text" th:value="${oneArea.sectionName}">
+        <label class="labelDescriptive" for="assignedInput">Assigned to</label>
+        <input id="assignedInput" name="assignedTo" type="text" th:value="${oneArea.assignedTo}" readonly>
+        <label class="labelDescriptive">Done by</label>
+        <input name="doneBy" type="text" th:value="${oneArea.doneBy}" readonly>
 
-        <label>Kaffe diplom</label>
+        <label id="approvedLabel">Approved</label>
         <input type="checkbox" name="approvedStatus" th:checked="${oneArea?.approvedStatus}">
 
 <!--        <label>Choose your name</label>-->

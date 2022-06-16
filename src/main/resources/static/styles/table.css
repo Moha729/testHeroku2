@@ -5,6 +5,7 @@ table, th, td {
 table {
     border-collapse: collapse;
     width: 60%;
+    margin-left: 1%;
 }
 
 th {
@@ -21,5 +22,10 @@ table tr:hover {
 td, th {
     border: 1px solid black;
     text-align: center;
-    padding: 1%;
+    padding: 1.5%;
 }
+
+/*
+.inner-cells, td{
+    border: 0px;
+}*/

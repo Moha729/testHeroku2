@@ -54,10 +54,7 @@ public class CleaningRepo {
 //        section.setCompletionDate(instant.toString());
 //        System.out.println(section.getCompletionDate());
 
-        Date doneDateAndTime = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        section.setCompletionDate(dateFormat.format(doneDateAndTime));
-        System.out.println(dateFormat.format(doneDateAndTime));
+        //System.out.println(dateFormat.format(doneDateAndTime));
 
         String sql = "UPDATE cleaning_areas SET done_by = ?, done_date=? " +
                 "WHERE index_no =?";
