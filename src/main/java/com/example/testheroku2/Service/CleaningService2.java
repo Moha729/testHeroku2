@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -71,7 +70,7 @@ public class CleaningService2 {
             e.printStackTrace();
         }
         SimpleDateFormat myDateFormatted = new SimpleDateFormat("yyyy-MM-dd");
-        String formatedDAte = myDateFormatted.format(myDate);
+        //String formatedDAte = myDateFormatted.format(myDate);
         cleaning.setCompletionDate(myDate);
 
         for (int i = 0; i < sections.size(); i++) {
@@ -98,7 +97,7 @@ public class CleaningService2 {
                 allCleanings.get(i).setAssignedTo(cleaning.getAssignedTo());
                 allCleanings.get(i).setDoneBy(cleaning.getDoneBy());
                 allCleanings.get(i).setCompletionDate(cleaning.getCompletionDate());
-                System.out.println(allCleanings.get(i).getCompletionDate());
+         //       System.out.println(allCleanings.get(i).getCompletionDate());
                 allCleanings.get(i).setApprovedStatus(cleaning.isApprovedStatus());
 //                System.out.println(allCleanings.get(i).getAssignedTo().getMemberId());
 
