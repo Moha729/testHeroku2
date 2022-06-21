@@ -13,6 +13,6 @@ public class HomeController {
 
     @GetMapping("/admin-code90")
     public String getAdminIndex(){
-        return "admin-templates/code-90";
+        return "/admin-templates/code-90";
     }
 }
