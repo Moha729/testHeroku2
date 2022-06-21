@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Vanløse alle 82</title>
+    <link rel="stylesheet" href="../styles/admin-nav.css">
+    <link rel="stylesheet" href="../styles/forms.css">
+</head>
+<body>
+<div>
+    <ul>
+        <li><a href="/code-90">Admin</a></li>
+        <li><a href="/show-members">members</a></li>
+        <li><a href="/show-sections">sections</a></li>
+        <li><a href="/show-cleanings">cleanings</a></li>
+    </ul>
+</div>
+
+<div class="form-container">
+
+    <form action="/update-cleaning" method="post">
+
+        <label>Cleaning Id:</label>
+        <input type="number" name="cleaningId" th:value="${cleaning.cleaningId}" readonly>
+
+        <label>Week:</label>
+        <input type="number" name="weekNumb" th:value="${cleaning.weekNumb}" readonly>
+
+        <label>Section:</label>
+        <input type="text" name="cleaningSection.sectionName" th:value="${cleaning.cleaningSection.sectionName}" readonly>
+<!--
+        <select name="cleaningSection.sectionName">
+            <option th:text="${cleaning.cleaningSection.sectionName}"></option>
+            <option th:each="section :${allSections}" th:text="${section.sectionName}" ></option>
+        </select>
+-->
+
+        <label>Assigned to:</label>
+        <input type="text" name="assignedTo.memberName" th:value="${cleaning.assignedTo.memberName}" readonly>
+<!--
+        <select name="assignedTo.memberName" readonly>
+            <option th:each="member :${allMembers}" th:text="${member.memberName}"></option>
+        </select>
+-->
+
+
+        <label>Done by:</label>
+        <select name="doneBy.memberName">
+            <option th:each="member :${allMembers}" th:text="${member.memberName}"></option>
+        </select>
+
+        <label>Done date:</label>
+        <input type="date" name="theDate">
+
+        <label>Approved</label>
+        <input type="radio" name="approvedStatus" value="true" th:field="*{cleaning.approvedStatus}">
+        <label>not-approved</label>
+        <input type="radio" name="approvedStatus" value="false" th:field="*{cleaning.approvedStatus}">
+        <input type="submit" value="Edit">
+    </form>
+</div>
+</body>
+</html>

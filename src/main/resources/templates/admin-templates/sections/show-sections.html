@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin/Vanløse alle 82</title>
+    <link rel="stylesheet" href="styles/admin-nav.css">
+    <link rel="stylesheet" href="styles/table.css">
+</head>
+<body>
+<div>
+    <ul>
+        <li><a href="/code-90">Admin</a></li>
+        <li><a href="/show-members">members</a></li>
+        <li><a href="/show-sections">sections</a></li>
+        <li><a href="/show-cleanings">cleanings</a></li>
+    </ul>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>section id</th>
+            <th>section name</th>
+            <th>list index</th>
+            <th>active status</th>
+            <th><a href="/new-section"><button>Add new section</button></a></th>
+        </tr>
+        <tr th:each="section : ${allSections}">
+            <td th:text="${section.sectionId}"></td>
+            <td th:text="${section.sectionName}"></td>
+            <td></td>
+            <td th:text="${section.sectionActiveStatus}"></td>
+            <td><a th:href="@{'/update-section/'+${section.sectionId}}"><button>Edit</button></a></td>
+        </tr>
+
+    </table>
+</div>
+</body>
+</html>

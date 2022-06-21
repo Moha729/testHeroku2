@@ -1,4 +1,4 @@
-package com.example.testheroku2.Service.cleaning;
+package com.example.testheroku2.Service;
 
 import com.example.testheroku2.Repository.WeekRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,9 @@ public class WeekService {
     @Autowired
     WeekRepo weekRepo;
 
+    public int currentWeek;
+
+/*
     public void updateWeek (int updatedWeek) {
         weekRepo.updateWeek(updatedWeek);
     }
@@ -18,4 +21,5 @@ public class WeekService {
     public int getBeforeWeek() {
         return weekRepo.beforeWeek();
     }
+*/
 }

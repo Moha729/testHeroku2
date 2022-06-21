@@ -14,11 +14,23 @@ public class CleaningService {
     @Autowired
     CleaningRepo cleaningRepo;
 
-    public ArrayList<CleaningArea> fetchAll(){
-        for (int i = 0; i < cleaningRepo.fetchAll().size(); i++) {
-            System.out.println(cleaningRepo.fetchAll().get(i).getSectionName());
+    public void startCleaningData (int weekCount){
+        cleaningRepo.startCleaningData(weekCount);
+    }
+
+
+        public ArrayList<CleaningArea> fetchAllSections () {
+        for (int i = 0; i < cleaningRepo.fetchAllSections().size(); i++) {
+            System.out.println("Areas raw: "+cleaningRepo.fetchAllSections().get(i).getSectionName());
         }
-        return cleaningRepo.fetchAll();
+        return cleaningRepo.fetchAllSections();
+    }
+
+    public ArrayList<CleaningArea> fetchAll(int weekCount){
+        for (int i = 0; i < cleaningRepo.fetchAll(weekCount).size(); i++) {
+            System.out.println("from service "+cleaningRepo.fetchAll(weekCount).get(i).getSectionName());
+        }
+        return cleaningRepo.fetchAll(weekCount);
     }
 
     public void addNew(CleaningArea cleaningArea) {
@@ -29,8 +41,8 @@ public class CleaningService {
         return cleaningRepo.findById(id);
     }
 
-    public void setAssignedTo(int id, CleaningArea section){
-        cleaningRepo.setAssigendTo(id, section);
+    public void setAssignedTo(int id, int noObjectProblemSetMemberIdToForeignKey, int weekCOunt){
+        cleaningRepo.setAssigendTo(id, noObjectProblemSetMemberIdToForeignKey, weekCOunt);
     }
 
     public void setAssigenTo(ArrayList<Member> members, ArrayList<CleaningArea> areas, int currentWeek){
@@ -42,7 +54,7 @@ public class CleaningService {
             for (int j = 0; j < weeksCount; j++) {
                 for (int k = 0; k < membersCount; k++) {
                     areas.get(j).setAssignedTo(members.get(k).getMemberName());
-                    cleaningRepo.setAssigendTo(j, areas.get(j));
+                    //cleaningRepo.setAssigendTo(j, areas.get(j), 1);
 
                 }
             }

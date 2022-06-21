@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin/Vanløse alle 82</title>
+    <link rel="stylesheet" href="styles/admin-nav.css">
+    <link rel="stylesheet" href="styles/table.css">
+</head>
+<body>
+<div>
+    <ul>
+        <li><a href="/code-90">Admin</a></li>
+        <li><a href="/show-members">members</a></li>
+        <li><a href="/show-sections">sections</a></li>
+        <li><a href="/show-cleanings">cleanings</a></li>
+    </ul>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>member id</th>
+            <th>member name</th>
+            <th>list index</th>
+            <th>active status</th>
+            <th><a href="/new-member"><button>Add new member</button></a></th>
+        </tr>
+        <tr th:each="member : ${allMembers}">
+            <td th:text="${member.memberId}"></td>
+            <td th:text="${member.memberName}"></td>
+            <td></td>
+            <td th:text="${member.memberActiveStatus}"></td>
+            <td><a th:href="@{'/update-member/'+${member.memberId}}"><button>Edit</button></a></td>
+        </tr>
+
+    </table>
+</div>
+</body>
+</html>

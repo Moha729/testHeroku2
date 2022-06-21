@@ -22,28 +22,65 @@ public class CleaningRepo {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public ArrayList<CleaningArea> fetchAll() {
-        String sql = "SELECT * FROM cleaning_areas";
-        RowMapper<CleaningArea> rowMapper = new CleaningAreaMapper();
+    public ArrayList<CleaningArea> fetchAllSections(){
+        String sql = "SELECT * FROM sections ORDER BY section_id";
+        RowMapper<CleaningArea> rowMapper = new BeanPropertyRowMapper<>(CleaningArea.class);
         return (ArrayList<CleaningArea>) jdbcTemplate.query(sql, rowMapper);
     }
 
+    public ArrayList<CleaningArea> fetchAll(int weekCount) {
+        for (int i = 0; i < fetchAllSections().size(); i++) {
+            System.out.println("LIST FROM SELECT SECTIONS "+fetchAllSections().get(i).getSectionName());
+        }
+
+        String sql = "SELECT section_id,  " +
+                "assigned_to, done_by, done_date, done_status FROM cleaning_data "
+                /*"JOIN sections ON cleaning_data.section_id = sections.section_id " +
+                "WHERE week_count = ?"*/;
+        RowMapper<CleaningArea> rowMapper = new CleaningAreaMapper();
+        //System.out.println("HER GALT 1");
+        ArrayList<CleaningArea> cleaningAreas = (ArrayList<CleaningArea>) jdbcTemplate.query(sql, rowMapper);
+        //System.out.println("HER GALT 2");
+        System.out.println("OUTOFBOUNCE SECTIONS.SIZE "+ fetchAllSections().size());
+        System.out.println("OUTOFBOUNCE FROM CLEANING-DATA "+ cleaningAreas.size());
+        for (int i = 0; i < cleaningAreas.size(); i++) {
+            System.out.println("ZEUS_AS_ID "+ cleaningAreas.get(i).getSectionId());
+            System.out.println("ZEUS_AS_NAME "+ cleaningAreas.get(i).getSectionName());
+            if (fetchAllSections().get(i).getSectionId()==cleaningAreas.get(i).getSectionId()){
+            cleaningAreas.get(i).setSectionName(fetchAllSections().get(i).getSectionName());
+                System.out.println();
+            }
+        }
+        return cleaningAreas;
+    }
+
     public void addNew(CleaningArea cleaningArea){
-        String sql = "INSERT INTO cleaning_areas (index_no, area_def) VALUES (?,?)";
+        String sql = "INSERT INTO sections (section_id, section_name ) VALUES (?,?)";
         jdbcTemplate.update(sql, cleaningArea.getSectionId(), cleaningArea.getSectionName());
     }
 
     public CleaningArea findById(int id){
-        String sql = "SELECT * FROM cleaning_areas WHERE index_no = ?";
+        String sql = "SELECT section_id, assigned_to, done_by, done_date, done_status " +
+                "FROM cleaning_data WHERE section_id = ?";
+        String sql2 = "SELECT * FROM cleaning_areas WHERE index_no = ?";
         RowMapper<CleaningArea> rowMapper = new CleaningAreaMapper();
         return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 
-    public void setAssigendTo(int id, CleaningArea section){
-        String sql = "UPDATE cleaning_areas SET assigned_to = ? " +
-                "WHERE index_no =?";
-        jdbcTemplate.update(sql, section.getAssignedTo(),
-        id);
+    public void startCleaningData (int weekCount){
+        for (int i = 0; i < fetchAllSections().size(); i++) {
+            int sectionId = fetchAllSections().get(i).getSectionId();
+            String sql = "INSERT INTO cleaning_data (week_count, section_id) VALUES  (?,?)";
+            //String sql1 = "UPDATE cleaning_data SET week_count = ?, section_id = ?";
+            jdbcTemplate.update(sql, weekCount, sectionId);
+        }
+    }
+
+    public void setAssigendTo(int id, int noObjectProblemSetMemberIdToForeignKey, int weekCount){
+        String sql = "UPDATE cleaning_data SET assigned_to = ? " +
+                "WHERE section_id = ? AND week_count = ?";
+        jdbcTemplate.update(sql, noObjectProblemSetMemberIdToForeignKey,
+        id, weekCount);
     }
 
 
@@ -56,15 +93,15 @@ public class CleaningRepo {
 
         //System.out.println(dateFormat.format(doneDateAndTime));
 
-        String sql = "UPDATE cleaning_areas SET done_by = ?, done_date=? " +
-                "WHERE index_no =?";
+        String sql = "UPDATE cleaning_data SET done_by = ?, done_date=? " +
+                "WHERE section_id =?";
         jdbcTemplate.update(sql, section.getDoneBy(), section.getCompletionDate(),
                 id);
 
     }
 
     public void setApproved(int id, CleaningArea section) {
-        String sql = "UPDATE cleaning_areas SET done_status = ? WHERE index_no = ?";
+        String sql = "UPDATE cleaning_data SET done_status = ? WHERE section_id = ?";
         jdbcTemplate.update(sql, section.isApprovedStatus(),
                 id);
     }

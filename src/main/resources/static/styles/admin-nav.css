@@ -1,0 +1,23 @@
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 1.5%;
+    overflow: hidden;
+}
+a:link, a:visited{
+    display: block;
+    font-weight: bold;
+    color: #57a3aa;
+    background-color: greenyellow;
+    width: 120px;
+    text-align: center;
+    padding: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+a:hover, a:active{
+    background-color: yellow;
+}
+li{
+    float: left;
+}

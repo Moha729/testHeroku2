@@ -16,7 +16,7 @@ public class MemberRepo {
     JdbcTemplate jdbcTemplate;
 
     public List<Member> fetchAll () {
-        String sql = "SELECT id_id, name_name FROM test_two";
+        String sql = "SELECT id_id, name_name FROM members";
         RowMapper rowMapper = new MemberMapper();
         return jdbcTemplate.query(sql, rowMapper);
     }

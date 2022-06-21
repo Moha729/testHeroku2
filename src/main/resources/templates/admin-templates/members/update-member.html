@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin/Vanløse alle 82</title>
+  <link rel="stylesheet" href="../styles/admin-nav.css">
+  <link rel="stylesheet" href="../styles/forms.css">
+</head>
+<body>
+<div>
+  <ul>
+    <li><a href="/code-90">Admin</a></li>
+    <li><a href="/show-members">members</a></li>
+    <li><a href="/show-sections">sections</a></li>
+    <li><a href="/show-cleanings">cleanings</a></li>
+  </ul>
+</div>
+
+<div class="form-container">
+
+  <form action="/update-member" method="post">
+    <label>Member Id:</label>
+    <input type="number" name="memberId" th:value="${member.memberId}" readonly>
+    <label>Enter Name:</label>
+    <input type="text" name="memberName" th:value="${member.memberName}">
+    <label>Active</label>
+    <input type="radio" name="memberActiveStatus" value="true" th:field="*{member.memberActiveStatus}">
+    <label>non-active</label>
+    <input type="radio" name="memberActiveStatus" value="false" th:field="*{member.memberActiveStatus}">
+    <input type="submit" value="Edit">
+  </form>
+</div>
+</body>
+</html>

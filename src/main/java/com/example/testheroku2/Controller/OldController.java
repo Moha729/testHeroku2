@@ -1,26 +1,8 @@
 package com.example.testheroku2.Controller;
 
-import com.example.testheroku2.Model.Member;
-import com.example.testheroku2.Model.cleaning.CleaningArea;
-import com.example.testheroku2.Model.WeekNumberWrapper;
-import com.example.testheroku2.Service.MemberService;
-import com.example.testheroku2.Service.cleaning.CleaningService;
-import com.example.testheroku2.Service.cleaning.WeekService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+/*
 @Controller
-public class NewController {
+public class OldController {
 
     @Autowired
     MemberService memberService;
@@ -32,7 +14,13 @@ public class NewController {
     @GetMapping("/")
     public String getInd(Model model, Model model2, Model model3){
 
-        List<CleaningArea> areas = cleaningService.fetchAll();
+        if (weekNumb.getWeekNumb() == 0){
+            System.out.println("Week numb is "+weekNumb.getWeekNumb());
+            weekNumb.setWeekNumb(weekService.getBeforeWeek());
+            System.out.println("Week numb is set to: "+weekNumb.getWeekNumb());
+        }
+
+        List<CleaningArea> areas = cleaningService.fetchAllSections();
 
 
         model.addAttribute("MembersList", testMembers(areas));
@@ -44,14 +32,15 @@ public class NewController {
     WeekNumberWrapper weekNumb = new WeekNumberWrapper();
 
 
-    @PostMapping("/")
+    @PostMapping("/")//DONT CAll a post method GET???
     public String getWeekNumber(@ModelAttribute WeekNumberWrapper weekNumb){
-        System.out.println(weekNumb.getWeekNumb()+" weekNumb");
+        //System.out.println(weekNumb.getWeekNumb()+" weekNumb");
         this.weekNumb = weekNumb;
         weekService.updateWeek(weekNumb.getWeekNumb());
         return "redirect:/";
-    }
-    public ArrayList<Member> testMembers (/*int weekNumber*/List<CleaningArea> areas) {
+    }*/
+/*
+    public ArrayList<Member> testMembers (/*int weekNumber List<CleaningArea> areas) {
         ArrayList<Member> members = new ArrayList<>();
         List<Member> readMembers = memberService.fetchAll();
         for (int i = 0; i < readMembers.size(); i++) {
@@ -65,8 +54,10 @@ public class NewController {
 
         for (int i = areas.size(); i < members.size(); i++) {
             CleaningArea cleaningArea = new CleaningArea();
-            cleaningArea.setSectionName("");
+            cleaningArea.setSectionName("Off week");
+            System.out.println(cleaningArea.getSectionName()+i+" print 1");
             areas.add(cleaningArea);
+            System.out.println(areas.get(i).getSectionName()+" print 2");
         }
 
         if (weekNumb.getWeekNumb() == 0){
@@ -74,8 +65,10 @@ public class NewController {
             weekNumb.setWeekNumb(weekService.getBeforeWeek());
             System.out.println("Week numb is set to: "+weekNumb.getWeekNumb());
         }
+        ArrayList<Integer> noObjectProblemSetMemberIdToForeignKeys = new ArrayList<>();
+        int primitiveWeekCount = (weekNumb.getWeekNumb() - 23);
         int k = 0;
-        for (int j = 0; j < weekNumb.getWeekNumb(); j++) {
+        for (int j = 0; j < primitiveWeekCount; j++) {
             System.out.println("Week " + (j + 1));
 
             if (j != 0) {
@@ -90,44 +83,47 @@ public class NewController {
                 } else {
                     //System.out.println(areas.get(i) + " " + members.get(k));
                     areas.get(i).setAssignedTo(members.get(k).getMemberName());
+                    System.out.println("name: "+ members.get(k).getMemberName()
+                            + " id: "+ members.get(k).getMemberId());
+
+                    int noObjectProblemSetMemberIdToForeignKey = members.get(k).getMemberId();
+
+                    if (noObjectProblemSetMemberIdToForeignKey == members.get(k).getMemberId())
+                    {
+                        noObjectProblemSetMemberIdToForeignKeys.add(noObjectProblemSetMemberIdToForeignKey);
+                    }
                 }
                 k++;
             }
         }
-        setAssignedTo((ArrayList<CleaningArea>) areas);
+        setAssignedTo((ArrayList<CleaningArea>) areas, noObjectProblemSetMemberIdToForeignKeys);
         return members;
     }
-    public void setAssignedTo(ArrayList<CleaningArea> areas){
+    public void setAssignedTo(ArrayList<CleaningArea> areas, ArrayList<Integer> noObjectProblemSetMemberIdToForeignKeys){
         for (int i = 0; i < areas.size(); i++) {
-            cleaningService.setAssignedTo(areas.get(i).getSectionId(), areas.get(i));
+            System.out.println("Areas size in controller "+areas.size());
+            System.out.println("And the member Id I want to take with: "+ noObjectProblemSetMemberIdToForeignKeys.size());
+            cleaningService.setAssignedTo(areas.get(i).getSectionId(), noObjectProblemSetMemberIdToForeignKeys.get(i), weekService.getBeforeWeek());
+            System.out.println("THe relation between "+ areas.get(i).getSectionId() + " and "+ noObjectProblemSetMemberIdToForeignKeys.get(i));
         }
     }
 
-    @GetMapping("/set-done-by/{sectionID}")
+
+ */
+
+/*    @GetMapping("/set-done-by/{sectionID}")
     public String setDoneBy(@PathVariable("sectionID") int id, Model model){
-        List<CleaningArea> areas = cleaningService.fetchAll();
+        List<CleaningArea> areas = cleaningService.fetchAllSections();
         System.out.println(id);
-        model.addAttribute("oneArea", areas.get(id-1)/*cleaningService.findById(id)*/);
+        model.addAttribute("oneArea", areas.get(id)cleaningService.findById(id));
         model.addAttribute("membersList", testMembers(areas));
         return "cleaning/set-done-by";
-    }
+    }*/
 
-    @PostMapping("/set-done-by")
-    public String setDoneBy(@ModelAttribute CleaningArea cleaningArea){
-//        System.out.println(cleaningArea.getAssignedTo()+" are we even here");
-//        System.out.println(cleaningArea.getSectionName());
-//        System.out.println(cleaningArea.getSectionId());
-        Date doneDateAndTime = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        cleaningArea.setCompletionDate(dateFormat.format(doneDateAndTime));
-/*
-* insert into cleaning_data () values : weekNumb, sectionId, assignedTo, doneBy, doneDate, doneStatus
-* */
-        cleaningService.setDoneBy(cleaningArea.getSectionId(), cleaningArea);
-        return "redirect:/";
-    }
 
-    @GetMapping("/new-member")
+
+
+/*    @GetMapping("/new-member")
     public String newMember (){
         return "new-member";
     }
@@ -136,11 +132,11 @@ public class NewController {
     public String newMember (@ModelAttribute Member member) {
         memberService.addNew(member);
         return "redirect:/";
-    }
+    }*/
 
-//    @GetMapping("/new")
+/*//    @GetMapping("/new")
 //    public String getInd2(){
 //        return "index2";
 //    }
 
-}
+}*/

@@ -4,10 +4,12 @@ public class Member {
 
     private int memberId;
     private String memberName;
+    private boolean memberActiveStatus;
 
-    public Member(String memberName, int memberId) {
+    public Member(String memberName, int memberId, boolean memberActiveStatus) {
         this.memberName = memberName;
         this.memberId = memberId;
+        this.memberActiveStatus = memberActiveStatus;
     }
 
     public Member() {
@@ -29,5 +31,11 @@ public class Member {
         this.memberName = memberName;
     }
 
+    public boolean isMemberActiveStatus() {
+        return memberActiveStatus;
+    }
 
+    public void setMemberActiveStatus(boolean memberActiveStatus) {
+        this.memberActiveStatus = memberActiveStatus;
+    }
 }

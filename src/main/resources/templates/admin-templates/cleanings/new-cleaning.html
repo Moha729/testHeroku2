@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin/Vanløse alle 82</title>
+    <link rel="stylesheet" href="../styles/admin-nav.css">
+    <link rel="stylesheet" href="styles/forms.css">
+</head>
+<body>
+<div>
+    <ul>
+        <li><a href="/code-90">Admin</a></li>
+        <li><a href="/show-members">members</a></li>
+        <li><a href="/show-sections">sections</a></li>
+        <li><a href="/show-cleanings">cleanings</a></li>
+    </ul>
+</div>
+
+<div class="form-container">
+
+    <form action="/new-cleaning" method="post">
+
+        <label>Enter week:</label>
+        <input type="number" name="weekNumb">
+
+        <select name="cleaningSection.sectionName">
+            <option th:each="section :${allSections}" th:text="${section.sectionName}"></option>
+        </select>
+
+        <select name="assignedTo.memberName">
+            <option th:each="member :${allMembers}" th:text="${member.memberName}"></option>
+        </select>
+
+        <input type="submit" value="Add">
+    </form>
+</div>
+</body>
+</html>

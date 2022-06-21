@@ -12,8 +12,10 @@ public class CleaningAreaMapper implements RowMapper {
 
         CleaningArea cleaningArea = new CleaningArea();
 
-        cleaningArea.setSectionId(rs.getInt("index_no"));
-        cleaningArea.setSectionName(rs.getString("area_def"));
+        //System.out.println("HER GALT 1.1");
+        cleaningArea.setSectionId(rs.getInt("section_id"));
+        //cleaningArea.setSectionName(rs.getString("section_name"));
+        System.out.println("HER GALT 1.2");
         cleaningArea.setAssignedTo(rs.getString("assigned_to"));
         cleaningArea.setDoneBy(rs.getString("done_by"));
         cleaningArea.setCompletionDate(rs.getString("done_date"));

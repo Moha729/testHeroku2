@@ -1,8 +1,10 @@
 package com.example.testheroku2.Controller.cleaning;
 
+import com.example.testheroku2.Model.WeekNumberWrapper;
 import com.example.testheroku2.Model.cleaning.CleaningArea;
 import com.example.testheroku2.Service.MemberService;
 import com.example.testheroku2.Service.cleaning.CleaningService;
+import com.example.testheroku2.Service.WeekService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +20,21 @@ public class CleaningAdminController {
     CleaningService cleaningService;
     @Autowired
     MemberService memberService;
+    @Autowired
+    WeekService weekService;
 
+    WeekNumberWrapper weekNumb = new WeekNumberWrapper();
+
+/*
     @GetMapping("/manage-cleaning")
     public String getManageCleaning (Model model, Model model2){
-        model.addAttribute("MembersList", memberService.fetchAll());
-        model2.addAttribute("sectionsList", cleaningService.fetchAll());
+        if (weekNumb.getWeekNumb() == 0){
+            System.out.println("Week numb is "+weekNumb.getWeekNumb());
+            weekNumb.setWeekNumb(weekService.getBeforeWeek());
+            System.out.println("Week numb is set to: "+weekNumb.getWeekNumb());
+        }
+        //model.addAttribute("MembersList", memberService.fetchAll());
+        model2.addAttribute("sectionsList", cleaningService.fetchAllSections());
         return "/cleaning/manage-cleaning";
     }
 
@@ -53,5 +65,13 @@ public class CleaningAdminController {
         cleaningService.setApproved(cleaningArea.getSectionId(), cleaningArea);
         return "redirect:/manage-cleaning";
     }
+
+    @PostMapping("/start-new-week")
+    public String startCleaningData (@ModelAttribute WeekNumberWrapper weekNumb){
+        weekService.updateWeek(weekNumb.getWeekNumb());//UPDATE OR GET WTF??
+        cleaningService.startCleaningData(weekNumb.getWeekNumb());
+        return "redirect:/";
+    }
+*/
 
 }
