@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class WeekService {
 
+/*
 
     @Autowired
     WeekRepo weekRepo;
 
     public int currentWeek;
+*/
 
 /*
     public void updateWeek (int updatedWeek) {

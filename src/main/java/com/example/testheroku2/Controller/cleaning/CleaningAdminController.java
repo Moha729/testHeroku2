@@ -23,9 +23,9 @@ public class CleaningAdminController {
     @Autowired
     WeekService weekService;
 
-    WeekNumberWrapper weekNumb = new WeekNumberWrapper();
+  /*  WeekNumberWrapper weekNumb = new WeekNumberWrapper();
 
-/*
+
     @GetMapping("/manage-cleaning")
     public String getManageCleaning (Model model, Model model2){
         if (weekNumb.getWeekNumb() == 0){
